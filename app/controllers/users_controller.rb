@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:index]
   
-  def index
-    @user = User.all
-  end
+  #def index
+    #@user = User.all
+  #end
 
   def new
     @user = User.new
@@ -19,10 +19,11 @@ class UsersController < ApplicationController
       render :new
     end
   end
+  
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
 end
 
-private
-
-def user_params
-  params.require(:user).permit(:name, :email, :password, :password_confirmation)
-end
